@@ -1,0 +1,107 @@
+﻿@model Case
+
+@{
+    bool exist = false;
+    string picturePath = "~/Pictures/";
+    string samplePath = "~/Samples/";
+}
+
+<section id="leftColumn">
+    <h3>Anmälan</h3>
+    <p>
+        <span class="label">Typ av brott:</span><br />
+        @Model.TypeofCrime
+    </p>
+    <p>
+        <span class="label">Brottsplats: </span><br />
+        @Model.Place 
+    </p>
+    <p>
+        <span class="label">Brottsdatum: </span><br />
+        @Model.DateTimeOfObservation.ToString("yyyy/MM/dd")
+    </p>
+    <p>
+        <span class="label">Anmälare: </span><br />
+        @Model.InformerName
+    </p>
+    <p>
+        <span class="label">Telefon: </span><br />
+        @Model.InformerPhone
+    </p>
+    <p>
+        <span class="label">Observationer:</span><br />
+        @Model.Observation
+    </p>
+</section>
+
+<section id="rightColumn">
+    <h3>Utredning</h3>
+    <p>
+        <span class="label">Status:</span><br />
+        @Model.Status
+    </p>
+    <p>
+        <span class="label">Ansvarig avdelning: </span><br />
+        @Model.Department
+    </p>
+    <p>
+        <span class="label">Handläggare: </span><br />
+        @Model.Employee  
+    </p>
+    <p>
+        <span class="label">Provtagning: </span><br />
+        @if (Model.Samples.Count > 0)
+        {
+            exist = true;
+            string copySamplePath = samplePath;
+            foreach (var sample in Model.Samples)
+            {
+                samplePath += sample.SampleName;
+                <a href="@Url.Content(samplePath)">@System.IO.Path.GetFileName(sample.SampleName)</a>
+                samplePath = copySamplePath;
+                <br />
+            }
+        }
+
+        @if (exist == false)
+        {
+            <p>Fil saknas</p>
+        }
+
+        else
+        {
+            exist = false;
+        }
+
+    </p>
+    <p>
+        <span class="label">Ytterligare information: </span><br />
+        @Model.Info
+    </p>
+    <p>
+        <span class="label">Händelser: </span><br />
+        @Model.Action
+    </p>
+    <p>
+        <span class="label">Bilder: </span><br />
+       
+        @if (Model.Pictures.Count > 0)
+        {
+            string copyPicturePath = picturePath;
+
+            foreach (var picture in Model.Pictures)
+            {
+                exist = true;
+                picturePath += picture.PictureName;
+                <img src="@Url.Content(picturePath)" alt="Klicka på bilden" width="150" height="150" style="display:block; margin-top: 10px"/>
+                picturePath = copyPicturePath;
+            }
+        }
+       
+        @if (exist == false)
+        {
+            <p>Fil saknas</p>
+        }
+
+    </p>
+</section>

@@ -1,0 +1,22 @@
+﻿@model Case
+
+@{
+    Layout = "_ManagerLayout";
+}
+
+<h2>Detaljer för ärende: 2014-45-0201</h2>
+<p class="info">Du är inloggad som avdelningschef</p>
+
+@await Component.InvokeAsync("CrimeReport", new { ViewBag.id })
+
+<section id="bottomColumn">
+    <h3>Redigera ärende</h3>
+    <p>Ange handläggare:</p>
+    <form asp-controller="Manager" asp-action="SavesChanges" method="post">
+        <select asp-for="Employee" asp-items="@(new SelectList(ViewBag.ListOfEmployees, "", "EmployeeName"))">
+            <option selected="selected">Välj</option>
+        </select>
+        <p><input type="checkbox" name="noAction" data-val="true" /> Ingen åtgärd: <input asp-for="Info" value="Ange motivering" /></p>
+        <p><input class="button" type="submit" value="Spara" /></p>
+    </form>
+</section>

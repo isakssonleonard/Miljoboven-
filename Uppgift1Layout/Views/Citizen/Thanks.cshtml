@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "_PicturesLayout";
+}
+
+<h2>Tack för din Anmälan</h2>
+<p class="info">I Småstad är inga brott för små för att anmälas</p>
+
+@await Component.InvokeAsync("Thanks", new { number = ViewBag.löpnummer })
+
+<p><a class="button" asp-action="Index" asp-controller="Home">Avsluta</a></p>

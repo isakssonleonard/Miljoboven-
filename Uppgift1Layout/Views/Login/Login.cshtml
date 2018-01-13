@@ -1,0 +1,32 @@
+﻿@model LoginModel
+
+@{
+    Layout = "_PicturesLayout";
+}
+
+<h2>Inloggning för Småstads personal</h2>
+<p class="info">En säker tjänst från Småstads IT-avdelning</p>
+
+<form method="post" asp-controller="Login" asp-action="Login">
+    <p>
+        <input type="hidden" name="isSubmitted" value="true" />
+    </p>
+    <p>
+        <label asp-for="Name" class="label">Användarnamn:</label><br />
+        <input asp-for="Name" />
+    </p>
+    <p>
+        <label asp-for="Password" class="label">Lösenord:</label><br />
+        <input asp-for="Password" />
+    </p>
+    <p>
+        <input class="button" type="submit" value="Logga in" />
+    </p>
+
+    <input type="hidden" asp-for="ReturnUrl" />
+
+    <div asp-validation-summary="All"></div>
+</form>
+
+
+

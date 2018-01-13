@@ -1,0 +1,65 @@
+﻿@model IRepository
+
+@{
+    Layout = "_CoordinatorLayout";
+    
+}
+
+<h2>Ärenden</h2>
+<p class="info">Du är inloggad som samordnare</p>
+
+<table id="managerForm">
+    <tr>
+        <td class="label">Välj status:</td>
+        <td class="label">Välj avdelning:</td>
+        <td>&nbsp;</td>
+        <td class="label">Ärendenummer:</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <select name="status">
+                <option selected="selected">Välj alla</option>
+                @foreach (var status in Model.Status)
+                {
+                    <option>@status.StatusName</option>
+                }
+            </select>
+        </td>
+        <td>
+            <select name="department">
+                <option selected="selected">Välj alla</option>
+                @foreach (var department in Model.Departments)
+                {
+                    <option>@department.DepartmentName</option>
+                }
+            </select>
+        </td>
+        <td><input class="button" type="submit" value="Hämta lista" /></td>
+        <td><input name="casenumber" /></td>
+        <td><input class="button" type="submit" value="Sök" /></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Ärende anmält</th>
+        <th>Ärendenummer</th>
+        <th>Miljöbrott</th>
+        <th>Status</th>
+        <th>Avdelning</th>
+        <th>Handläggare</th>
+    </tr>
+
+    @foreach (var Case in Model.Cases)
+    {
+        <tr>
+            <td>@Case.DateTimeOfObservation.ToString("yyyy/MM/dd")</td>
+            <td><a asp-controller="Coordinator" asp-action="Crimecoordinator" asp-route-id="@Case.ID">@Case.RefNumber@Case.ID</a></td>
+            <td>@Case.TypeofCrime</td>
+            <td>@Case.Status</td>
+            <td>@Case.Department</td>
+            <td>@Case.Employee</td>
+        </tr>
+    }
+</table>

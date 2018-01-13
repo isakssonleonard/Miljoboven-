@@ -1,0 +1,10 @@
+﻿{
+  "Data": {
+    "miljobovencon": {
+      "ConnectionString": "Server=(localdb)\\MSSQLLocalDB; Database=miljoboven; Trusted_Connection=True; MultipleActiveResultSets=True"
+    },
+    "miljobovenidentity": {
+      "ConnectionString": "Server=(localdb)\\MSSQLLocalDB; Database=Identity; Trusted_Connection=True; MultipleActiveResultSets=True"
+    }
+  }
+}
